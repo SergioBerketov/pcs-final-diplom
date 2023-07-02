@@ -9,10 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class BooleanSearchEngine implements SearchEngine {
-
     Map<String, List<PageEntry>> infoAboutWord = new HashMap<>();
-
-
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
