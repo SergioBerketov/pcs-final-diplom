@@ -18,11 +18,11 @@ public class PageEntry implements Comparable<PageEntry> {
 
     @Override
     public String toString() {
-        return "Contact{" +
+        return "PageEntry" + '{' + "\n"+
                 "\n\tPDF='" + pdfName + "'," +
                 "\n\tpage='" + page + "'," +
-                "\n\tcount'" + count + "'," +
-                '}';
+                "\n\tcount'" + count + "'" + "\n" +
+                '}' + "\n" + "\n";
     }
 
     public String getPdfName() {

@@ -18,9 +18,8 @@ public class BooleanSearchEngine implements SearchEngine {
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
-        File dir = new File(pdfsDir.toURI());
-        if (dir.isDirectory()) {
-            for (File item : dir.listFiles()) {
+        if (pdfsDir.isDirectory()) {
+            for (File item : pdfsDir.listFiles()) {
                 if (item.isFile()) {
 
                     try (var document = new PdfDocument(new PdfReader(item))) {
