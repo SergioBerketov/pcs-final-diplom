@@ -23,7 +23,6 @@ public class Main {
                         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
                 ) {
-
                     String word = in.readLine();
                     List<PageEntry> processedRequest = engine.search(word);
 
@@ -31,7 +30,6 @@ public class Main {
                     String json = objectMapper.writeValueAsString(processedRequest);
 
                     out.println(json);
-
                 }
             }
         } catch (IOException e) {
