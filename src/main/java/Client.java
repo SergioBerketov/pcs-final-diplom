@@ -19,19 +19,19 @@ public class Client {
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
              BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));)
         {
-            String answer = in.readLine();
-            System.out.println(answer);
+
             String word = "бизнес";
             out.println(word);
 
             String newAnswer = in.readLine();
 
-            List<String> listOfWords = new ArrayList<>();
-            listOfWords.add(newAnswer);
+            List<String> listOfAnswers = new ArrayList<>();
+            listOfAnswers.add(newAnswer);
+            System.out.println(listOfAnswers);
 
             StringBuilder builder = new StringBuilder();
 
-            for (String s : listOfWords) {
+            for (String s : listOfAnswers) {
                 builder.append(s);
             }
             System.out.println(builder.toString());

@@ -38,7 +38,7 @@ public class BooleanSearchEngine implements SearchEngine {
                                 wordAndCount.put(word, wordAndCount.getOrDefault(word, 0) + 1);
 
                                 PageEntry currentPageEntry = new PageEntry(item.getName(), document.getNumberOfPages(),
-                                        wordAndCount.getOrDefault(word, 0) + 1);
+                                        wordAndCount.get(word));
                                 List<PageEntry> allEntries = infoAboutWord.getOrDefault(word, new ArrayList<>());
                                 allEntries.add(currentPageEntry);
                                 infoAboutWord.put(word, allEntries);
@@ -52,7 +52,8 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        List<PageEntry> result = infoAboutWord.get(word).stream()
+        List<PageEntry> result = infoAboutWord.get(word)
+                .stream()
                 .sorted(PageEntry::compareTo)
                 .collect(Collectors.toList());
         result.toString();
