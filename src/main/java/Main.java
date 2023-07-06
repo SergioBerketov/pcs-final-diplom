@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -24,14 +25,13 @@ public class Main {
                 ) {
 
                     String word = in.readLine();
-
                     List<PageEntry> processedRequest = engine.search(word);
 
-//                    GsonBuilder builder = new GsonBuilder();
-//                    Gson gson = builder.create();
-//                    gson.toJson(processedRequest);
+                    ObjectMapper objectMapper = new ObjectMapper();
+                    String json = objectMapper.writeValueAsString(processedRequest);
 
-                    out.println(processedRequest);
+                    out.println(json);
+
                 }
             }
         } catch (IOException e) {

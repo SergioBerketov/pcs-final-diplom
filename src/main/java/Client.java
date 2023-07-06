@@ -17,24 +17,13 @@ public class Client {
 
         try (Socket clientSocket = new Socket(HOST, PORT);
              PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));)
-        {
+             BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));) {
 
             String word = "бизнес";
             out.println(word);
 
             String newAnswer = in.readLine();
-
-            List<String> listOfAnswers = new ArrayList<>();
-            listOfAnswers.add(newAnswer);
-            System.out.println(listOfAnswers);
-
-            StringBuilder builder = new StringBuilder();
-
-            for (String s : listOfAnswers) {
-                builder.append(s);
-            }
-            System.out.println(builder.toString());
+            System.out.println(newAnswer);
 
         } catch (IOException e) {
             throw new RuntimeException(e);

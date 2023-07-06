@@ -13,7 +13,13 @@ public class PageEntry implements Comparable<PageEntry> {
 
     @Override
     public int compareTo(PageEntry entryCount) {
-        return (this.count - entryCount.page);
+        if (this.count == entryCount.count) {
+            return 0;
+        } else if (this.count < entryCount.count) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
     @Override
