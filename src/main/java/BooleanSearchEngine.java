@@ -39,7 +39,9 @@ public class BooleanSearchEngine implements SearchEngine {
 
                                 PageEntry currentPageEntry = new PageEntry(item.getName(), document.getNumberOfPages(),
                                         wordAndCount.get(word));
-                                List<PageEntry> allEntries = infoAboutWord.getOrDefault(word, new ArrayList<>());
+//                                List<PageEntry> allEntries = infoAboutWord.getOrDefault(word, new ArrayList<>());
+//                                allEntries.add(currentPageEntry);
+                                List<PageEntry> allEntries = new ArrayList<>();
                                 allEntries.add(currentPageEntry);
                                 infoAboutWord.put(word, allEntries);
                             }

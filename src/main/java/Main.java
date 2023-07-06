@@ -27,11 +27,11 @@ public class Main {
 
                     List<PageEntry> processedRequest = engine.search(word);
 
-                    GsonBuilder builder = new GsonBuilder();
-                    Gson gson = builder.create();
-                    gson.toJson(processedRequest);
+//                    GsonBuilder builder = new GsonBuilder();
+//                    Gson gson = builder.create();
+//                    gson.toJson(processedRequest);
 
-                    out.println(gson);
+                    out.println(processedRequest);
                 }
             }
         } catch (IOException e) {
