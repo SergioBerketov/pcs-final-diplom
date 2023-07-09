@@ -7,15 +7,18 @@ import com.itextpdf.kernel.pdf.canvas.parser.listener.SimpleTextExtractionStrate
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.itextpdf.kernel.pdf.PdfName.Path;
+import static com.itextpdf.kernel.pdf.PdfName.a;
 
 public class BooleanSearchEngine implements SearchEngine {
-     Map<String, List<PageEntry>> infoAboutWord = new HashMap<>();
+
+    Map<String, List<PageEntry>> infoAboutWords = new HashMap<>();
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
@@ -37,11 +40,15 @@ public class BooleanSearchEngine implements SearchEngine {
                                 }
                                 word = word.toLowerCase();
                                 wordAndCount.put(word, wordAndCount.getOrDefault(word, 0) + 1);
+                            }
 
-                                PageEntry currentPageEntry = new PageEntry(item.getName(), i, wordAndCount.get(word));
-                                List<PageEntry> allEntries = infoAboutWord.getOrDefault(word, new ArrayList<>());
+                            for (Map.Entry entry : wordAndCount.entrySet()) {
+                                String key = (String) entry.getKey();
+
+                                PageEntry currentPageEntry = new PageEntry(item.getName(), i, wordAndCount.get(key));
+                                List<PageEntry> allEntries = infoAboutWords.getOrDefault(key, new ArrayList<>());
                                 allEntries.add(currentPageEntry);
-                                infoAboutWord.put(word, allEntries);
+                                infoAboutWords.put(key, allEntries);
                             }
                         }
                     }
@@ -52,7 +59,7 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        List<PageEntry> result = infoAboutWord.get(word)
+        List<PageEntry> result = infoAboutWords.get(word)
                 .stream()
                 .sorted(PageEntry::compareTo)
                 .collect(Collectors.toList());
