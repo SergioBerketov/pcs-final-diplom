@@ -62,8 +62,13 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        word = word.toLowerCase();
-        return infoAboutWords.get(word);
+        String lowerCaseWord = word.toLowerCase();
+        List<PageEntry> userSearch = infoAboutWords.get(lowerCaseWord);
+        if (userSearch == null) {
+            return new ArrayList<>();
+        } else {
+            return userSearch;
+        }
     }
 }
 
