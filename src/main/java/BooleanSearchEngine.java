@@ -18,7 +18,7 @@ import static com.itextpdf.kernel.pdf.PdfName.a;
 
 public class BooleanSearchEngine implements SearchEngine {
 
-    Map<String, List<PageEntry>> infoAboutWords = new HashMap<>();
+    private Map<String, List<PageEntry>> infoAboutWords = new HashMap<>();
 
     public BooleanSearchEngine(File pdfsDir) throws IOException {
 
@@ -48,7 +48,10 @@ public class BooleanSearchEngine implements SearchEngine {
                                 PageEntry currentPageEntry = new PageEntry(item.getName(), i, wordAndCount.get(key));
                                 List<PageEntry> allEntries = infoAboutWords.getOrDefault(key, new ArrayList<>());
                                 allEntries.add(currentPageEntry);
-                                infoAboutWords.put(key, allEntries);
+                                infoAboutWords.put(key, allEntries
+                                        .stream()
+                                        .sorted(PageEntry::compareTo)
+                                        .collect(Collectors.toList()));
                             }
                         }
                     }
@@ -59,10 +62,8 @@ public class BooleanSearchEngine implements SearchEngine {
 
     @Override
     public List<PageEntry> search(String word) {
-        List<PageEntry> result = infoAboutWords.get(word)
-                .stream()
-                .sorted(PageEntry::compareTo)
-                .collect(Collectors.toList());
-        return result;
+        word = word.toLowerCase();
+        return infoAboutWords.get(word);
     }
 }
+
